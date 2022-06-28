@@ -30,6 +30,18 @@ async function run(){
         const result = await userCollection.findOne(query);
         res.send(result);
       });
+      app.put("/user/:email", async (req, res) => {
+        const email = req.params.email;
+        const user = req.body;
+        const filter = { email: email };
+        const options = { upsert: true };
+        const updateDoc = {
+          $set: user,
+        };
+        const result = await userCollection.updateOne(filter, updateDoc, options);
+        
+        res.send({ result});
+      });
       
     app.post('/product',async (req, res) => {
       const order = req.body;
@@ -39,6 +51,11 @@ async function run(){
     app.post('/Computer',async (req, res) => {
       const order = req.body;
       const result = await computerCollection.insertOne(order);
+      res.send(result);
+    });
+    app.post('/laptop',async (req, res) => {
+      const order = req.body;
+      const result = await laptopCollection.insertOne(order);
       res.send(result);
     });
 
@@ -68,12 +85,19 @@ async function run(){
         const result = await computerCollection.deleteOne(query);
         res.send(result);
     })
+      app.delete('/product/:id',async(req,res)=>{
+        const id =req.params.id;
+        const query = {_id: ObjectId(id)};
+        const result = await producCollection.deleteOne(query);
+        res.send(result);
+    })
       app.delete('/laptop/:id',async(req,res)=>{
         const id =req.params.id;
         const query = {_id: ObjectId(id)};
         const result = await laptopCollection.deleteOne(query);
         res.send(result);
     })
+   
 
 
 
