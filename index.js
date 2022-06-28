@@ -30,6 +30,12 @@ async function run(){
         const result = await userCollection.findOne(query);
         res.send(result);
       });
+      
+    app.post('/product',async (req, res) => {
+      const order = req.body;
+      const result = await producCollection.insertOne(order);
+      res.send(result);
+    });
 
       app.get('/product', async (req, res) => {
         const query = {};
