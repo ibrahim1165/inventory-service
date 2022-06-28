@@ -36,6 +36,11 @@ async function run(){
       const result = await producCollection.insertOne(order);
       res.send(result);
     });
+    app.post('/Computer',async (req, res) => {
+      const order = req.body;
+      const result = await computerCollection.insertOne(order);
+      res.send(result);
+    });
 
       app.get('/product', async (req, res) => {
         const query = {};
