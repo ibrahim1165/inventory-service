@@ -30,12 +30,7 @@ async function run(){
         const result = await userCollection.findOne(query);
         res.send(result);
       });
-      app.get("/user/:id",async(req, res)=>{
-        const id=req.params.id;
-        const query = {_id :ObjectId(id) };
-        const result = await userCollection.findOne(query);
-        res.send(result)
-      })
+
       app.post("/user",async(req, res)=>{
         const newUser =req.body;
         console.log(newUser)
@@ -79,29 +74,29 @@ async function run(){
         const result = await curser.toArray()
         res.send(result);
       })
-      app.get("/product/:id",async(req, res)=>{
-        const id=req.params.id;
-        const query = {_id :ObjectId(id) };
-        const result = await producCollection.findOne(query);
-        res.send(result)
-      })
-      app.put("/product/:id", async (req, res) => {
-        const email = req.params.email;
-        const updateUser = req.body;
-        const filter = { email: email };
-        const options = { upsert: true };
-        const updateDoc = {
-          $set:{ 
-          name:updateUser.name,
-          price:updateUser.price,
-          description:updateUser.description
-          }
+      // app.get("/product/:id",async(req, res)=>{
+      //   const id=req.params.id;
+      //   const query = {_id :ObjectId(id) };
+      //   const result = await producCollection.findOne(query);
+      //   res.send(result)
+      // })
+      // app.put("/product/:id", async (req, res) => {
+      //   const email = req.params.email;
+      //   const updateUser = req.body;
+      //   const filter = { email: email };
+      //   const options = { upsert: true };
+      //   const updateDoc = {
+      //     $set:{ 
+      //     name:updateUser.name,
+      //     price:updateUser.price,
+      //     description:updateUser.description
+      //     }
 
-        };
-        const result = await producCollection.updateOne(filter, updateDoc, options);
+      //   };
+      //   const result = await producCollection.updateOne(filter, updateDoc, options);
         
-        res.send({ result});
-      });
+      //   res.send({ result});
+      // });
 
       app.get('/computer', async (req, res) => {
         const query = {};
